@@ -1,0 +1,156 @@
+// Create an array
+
+const years1 = [1991, 1992, 1993]
+const years2 = new Array(1992, 1993, 1994)
+
+// retriving an element
+years1[0]
+years2[years2.length - 1]
+
+// Changing an element in array
+years1[0] = 2001
+/* But you can change the whole array
+e.g. years1 = [2001, 2002, 2003] */
+
+// Calling a function
+cut(years1[0])
+cut(years2[years2.length - 1])
+/* You can put the whole array as an argument
+e.g. cut(years) */
+
+// Array methods
+const friends = ["Mike", 'Peter', 'Amy'];
+
+friends.push('Jay');
+// push means add a new element in the end of the array
+friends.unshift('Summer');
+// unshift means add a new element at the beginning of the array
+
+friends.pop();
+// remove the last element. Don't need argument 
+friends.shift();
+// remove the first element. Don't need argument 
+
+friends.indexOf('Amy')
+// returning the index of the element
+friends.includes('Amy')
+// ES6: checking the element whether in the array, return true or false. -> Can use it in the conditional statement.
+
+// Coding Challeng #2 - 20230521
+
+function calcTip(bill) {
+    if (bill >= 50 && bill <= 300) {
+        return bill * 0.15;
+    } else {
+        return bill * 0.2;
+    }
+}
+
+const bill = [125, 555, 44];
+
+const tips = [calcTip(bill[0]), calcTip(bill[1]), calcTip(bill[bill.length - 1])];
+
+const total = [calcTip(bill[0]) + bill[0], calcTip(bill[1]) + bill[1], calcTip(bill[bill.length - 1]) + bill[2]];
+
+console.log(tips, total);
+
+// Objects: key-value pairs---------------------------------------
+// Create objects
+const summer = {
+    firstname: 'summer',
+    lastname: 'chen',
+    age: 2023 - 1994,
+    job: 'student',
+    friends: ['Amy', 'Bob', 'Cam']
+};
+
+// Retriving the value
+summer.lastname;
+summer['lastname']; //could put an expression
+const namekey = 'Name'
+summer['first' + namekey];
+
+// when should we use the second way square bracket notation: e.g.
+const input = prompt('Chooese what you want to know about summer?')
+console.log(summer[input]);
+
+
+// Adding new property
+summer.location = 'China';
+summer['email'] = '@uzh.ch';
+
+// Object methods
+const summerNew = {
+    firstname: 'summer',
+    lastname: 'chen',
+    birthyear: 1994,
+    job: 'student',
+    friends: ['Amy', 'Bob', 'Cam'],
+    drivelicense: false,
+
+    /*
+    calcAge: function (birthyear) {
+        return 2023 - birthyear
+    } 
+    
+    calcAge: function () {
+        return 2023 - this.birthyear
+    }
+    // this point to the object summerNew
+
+    */
+
+    calcAge: function () {
+        this.age = 2023 - this.birthyear
+        return this.age
+    },
+    // store the new property named age
+
+    getSummery: function () {
+        return `${this.firstname} is a ${this.calcAge()}-year old ${summerNew.job}, and she has ${this.drivelicense ? 'a' : 'no'} dirver's license.`
+    }
+
+};
+
+// two ways to calling the method
+console.log(summerNew.calcAge(1994));
+console.log(summerNew['calcAge'](1994));
+
+// challenge
+console.log(summerNew.getSummery())
+
+// Coding Challenge #3 -20230521
+
+const markMiller = {
+    firstname: 'Mark',
+    lastname: 'Miller',
+    mass: 78,
+    height: 1.69,
+    calcBMI: function () {
+        this.bmi = this.mass / this.height ** 2;
+        return this.bmi;
+    }
+}
+
+const johnSmith = {
+    firstname: 'John',
+    lastname: 'Smith',
+    mass: 92,
+    height: 1.95,
+    calcBMI: function () {
+        this.bmi = this.mass / this.height ** 2;
+        return this.bmi;
+    }
+}
+
+// You have to call the calcBMI firstly, then you can use markMiller.bmi
+markMiller.calcBMI();
+johnSmith.calcBMI();
+console.log(markMiller.bmi, johnSmith.bmi)
+
+if (markMiller.bmi > johnSmith.bmi) {
+    console.log(`${markMiller.firstname}'s BMI(${markMiller.bmi}) is higher than ${johnSmith.firstname}'s BMI(${johnSmith.bmi})`);
+} else {
+    console.log(`${johnSmith.firstname}'s BMI(${johnSmith.bmi}) is higher than ${markMiller.firstname}'s BMI(${markMiller.bmi})`);
+}
+
